@@ -82,6 +82,7 @@ export default function SignUpPage() {
                       placeholder="Your name"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
+                      autoComplete="name"
                     />
                   </div>
                   <div className="grid gap-2">
@@ -93,6 +94,7 @@ export default function SignUpPage() {
                       required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
+                      autoComplete="email"
                     />
                   </div>
                   <div className="grid gap-2">
@@ -103,6 +105,7 @@ export default function SignUpPage() {
                       required
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
+                      autoComplete="new-password"
                     />
                   </div>
                   <div className="grid gap-2">
@@ -113,6 +116,7 @@ export default function SignUpPage() {
                       required
                       value={repeatPassword}
                       onChange={(e) => setRepeatPassword(e.target.value)}
+                      autoComplete="new-password"
                     />
                   </div>
                   {error && (
