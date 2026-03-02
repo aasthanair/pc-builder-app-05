@@ -1,5 +1,5 @@
 
-# v0 PC Builder App
+# PC Builder App
 
 A full‑stack PC builder web app built with **Next.js (App Router)**, **Supabase**, and **Tailwind**.  
 Users can sign up, log in, browse components (CPU, GPU, RAM, Storage, Motherboard), build a custom PC, and place orders.
