@@ -21,7 +21,14 @@ const CATEGORY_ICON_MAP: Record<ComponentCategory, LucideIcon> = {
   Motherboard: CircuitBoard,
 }
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
+const fetcher = async (url: string) => {
+  const res = await fetch(url)
+  if (!res.ok) {
+    // For unauthorized/errored responses, return null so callers can safely fallback
+    return null
+  }
+  return res.json()
+}
 
 export default function BuilderPage() {
   const [activeCategory, setActiveCategory] = useState<ComponentCategory>('CPU')
@@ -33,12 +40,13 @@ export default function BuilderPage() {
     fetcher,
   )
 
-  const { data: builds, mutate: mutateBuilds } = useSWR<BuildWithItems[]>(
+  const { data: builds, mutate: mutateBuilds } = useSWR<BuildWithItems[] | null>(
     '/api/builds',
     fetcher,
   )
 
-  const draftBuild = builds?.find((b) => b.status === 'draft') || null
+  const buildList = Array.isArray(builds) ? builds : []
+  const draftBuild = buildList.find((b) => b.status === 'draft') || null
 
   const selectedComponentIds = new Set(
     draftBuild?.pc_build_items?.map((item) => item.component_id) || [],
